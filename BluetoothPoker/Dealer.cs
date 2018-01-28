@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Threading;
 
 namespace BluetoothPoker
 {
     class Dealer
-    
-    {
 
-        public void getready()
+    {
+        Dictionary<string, int> full = new Dictionary<string, int>();
+        Dictionary<string, int> left = new Dictionary<string, int>();
+        public Dealer()
         {
-            Dictionary<string, int> full = new Dictionary<string, int>();
             string kupa; //Heart
             string karo; //Diamonds
             string sinek; //Clubs
@@ -89,8 +91,19 @@ namespace BluetoothPoker
                     full.Add(sinek, i);
                     full.Add(maca, i);
                 }
-
             }
+        }
+
+        public string getcard()
+        {
+            Random num = new Random();
+            Thread.SpinWait(1000000);
+            string card =  full.Keys.ElementAt(num.Next(full.Count)).ToString();
+            full.Remove(card);
+            return card;
         }
     }
 }
+
+
+

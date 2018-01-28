@@ -14,49 +14,49 @@ namespace BluetoothPoker
         {
             return 0;
         }
-        public Tuple<bool, int, int> OnePair(List<string> el, int level = 1)
+        public Tuple<bool, int, int> isOnePair(List<string> el, int level = 1)
         {
             return new Tuple<bool, int, int>(false, 0, level);
         }
-        public Tuple<bool, int, int,int> TwoPair(List<string> el, int level=2)
+        public Tuple<bool, int, int,int> isTwoPair(List<string> el, int level=2)
         {
             return new Tuple<bool, int, int, int>(false, 0, 1, level);
         }
-        public Tuple<bool, int,int> ThreeofaKind(List<string> el, int level=3)
+        public Tuple<bool, int,int> isThreeofaKind(List<string> el, int level=3)
         {
             return new Tuple<bool, int,int>(false, 0,level);
         }
-        public Tuple<bool, int, int> Straight(List<string> el, int level=4)
+        public Tuple<bool, int, int> isStraight(List<string> el, int level=4)
         {
             return new Tuple<bool, int, int>(false, 0,level);
         }
-        public Tuple<bool, int, int> Flush(List<string> el, int level=5)
+        public Tuple<bool, int, int> isFlush(List<string> el, int level=5)
         {
             return new Tuple<bool, int, int>(false, 0, level); //return with highest Value
         }
-        public Tuple<bool, int, int, int> FullHouse(List<string> el, int level=6)
+        public Tuple<bool, int, int, int> isFullHouse(List<string> el, int level=6)
         {
-            if (TwoPair(el).Item1 == true && ThreeofaKind(el).Item1 == true)
+            if (isTwoPair(el).Item1 == true && isThreeofaKind(el).Item1 == true)
             {
                 return new Tuple<bool, int, int, int>(true, 3, 2, level);
             }
             return new Tuple<bool, int, int, int>(false, 0, 0, level);
         }
-        public Tuple<bool, int, int, int> FourofaKİnd(List<string> el, int level=7)
+        public Tuple<bool, int, int, int> isFourofaKİnd(List<string> el, int level=7)
         {
                 return new Tuple<bool, int, int, int>(true, 3, 2, level);
         }
-        public Tuple<bool, int, int> StraightFlush(List<string> el, int level = 8)
+        public Tuple<bool, int, int> isStraightFlush(List<string> el, int level = 8)
         {
-            if (Straight(el).Item1 == true && Flush(el).Item1 == true)
+            if (isStraight(el).Item1 == true && isFlush(el).Item1 == true)
             {
                 return new Tuple<bool, int, int>(true, 3, level);
             }
             return new Tuple<bool, int, int>(false, 0, level);
         }
-        public Tuple<bool, int, int> RoyalFlush(List<string> el, int level = 9)
+        public Tuple<bool, int, int> isRoyalFlush(List<string> el, int level = 9)
         {
-            if (Straight(el).Item1 == true && Flush(el).Item1 == true)
+            if (isStraight(el).Item1 == true && isFlush(el).Item1 == true)
             {
                 return new Tuple<bool, int, int>(true, 3, level);
             }
