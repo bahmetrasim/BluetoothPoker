@@ -42,7 +42,7 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, int, int, int>(false, 0, 0, level);
         }
-        public Tuple<bool, int, int, int> isFourofaKİnd(List<string> el, int level=7)
+        public Tuple<bool, int, int, int> isFourofaKind(List<string> el, int level=7)
         {
                 return new Tuple<bool, int, int, int>(true, 3, 2, level);
         }

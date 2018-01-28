@@ -45,5 +45,30 @@ namespace BluetoothPoker
             }  
             while (playernumber < allplayers.Count);
         }
+
+        private void Winner_Click(object sender, EventArgs e)
+        {
+            WinningRules status = new WinningRules();
+            //player1
+            status.isOnePair(player1);
+            status.isTwoPair(player1);
+            status.isThreeofaKind(player1);
+            status.isStraight (player1);
+            status.isFlush (player1);
+            status.isFullHouse (player1);
+            status.isFourofaKind (player1);
+            status.isStraightFlush (player1);
+            status.isRoyalFlush(player1);
+            //player2
+            status.isOnePair(player1);
+            status.isTwoPair(player1);
+            status.isThreeofaKind(player1);
+            status.isStraight(player1);
+            status.isFlush(player1);
+            status.isFullHouse(player1);
+            status.isFourofaKind(player1);
+            status.isStraightFlush(player1);
+            status.isRoyalFlush(player1);
+        }
     }
 }

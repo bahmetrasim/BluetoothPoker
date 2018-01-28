@@ -141,6 +141,7 @@
             this.Winner.TabIndex = 11;
             this.Winner.Text = "Winner";
             this.Winner.UseVisualStyleBackColor = true;
+            this.Winner.Click += new System.EventHandler(this.Winner_Click);
             // 
             // whowins
             // 
