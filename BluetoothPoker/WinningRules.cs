@@ -16,14 +16,12 @@ namespace BluetoothPoker
         }
         public Tuple<bool, int, int> isOnePair(List<string> el, int level = 1)
         {
-            for(int i = 0; i<el.count; i++)
+            el.sort();
+            for(int i = 0; i<el.count-1; i++)
             {
-                for(int j = 0; j<el.count; j++)
+                if (el[i].Substring(0,1) == el[i+1].Substring(0,1))
                 {
-                    if (el[i].Substring(0,1) == el[j+1].Substring(0,1))
-                    {
                     return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
-                    }
                 }
             }
             return new Tuple<bool, int, int>(false, 0, level);
@@ -34,6 +32,14 @@ namespace BluetoothPoker
         }
         public Tuple<bool, int,int> isThreeofaKind(List<string> el, int level=3)
         {
+            el.sort();
+            for(int i = 0; i<el.count-2; i++)
+            {
+                if (el[i].Substring(0,1) == el[i+1].Substring(0,1) && el[i].Substring(0,1) == el[i+2].Substring(0,1) )
+                {
+                    return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+                }
+            }
             return new Tuple<bool, int,int>(false, 0,level);
         }
         public Tuple<bool, int, int> isStraight(List<string> el, int level=4)
