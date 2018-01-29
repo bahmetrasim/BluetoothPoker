@@ -14,8 +14,8 @@ namespace BluetoothPoker
     {
         List<string> player1 = new List<string>();
         List<string> player2 = new List<string>();
-        List<List<string>> allplayers = new List<List<string>>();
         Dealer Deste = new Dealer();
+        List<List<string>> allplayers = new List<List<string>>();
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +23,7 @@ namespace BluetoothPoker
 
         private void Deal_Click(object sender, EventArgs e)
         {
+            ResetForm();
             for (int i = 0; i < 5; i++)
             {
                 player1.Add(Deste.getcard());
@@ -34,41 +35,39 @@ namespace BluetoothPoker
         }
         public void UpdateForm(List<List<string>> all)
         {
-            int playernumber =0;
+            int playernumber = 0;
             do
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    Controls["label" + (playernumber*5+i)].Text = all[playernumber][i];
+                    Controls["label" + (playernumber * 5 + i)].Text = all[playernumber][i];
                 }
                 playernumber++;
-            }  
+            }
             while (playernumber < allplayers.Count);
         }
 
+        public void ResetForm()
+        {
+            int labelnumber = -1;
+            foreach (Control vControl in Controls)
+            {
+                if (vControl is Label) labelnumber++;
+            }
+
+            for (int i = 0; i < labelnumber; i++)
+            {
+                Controls["label" + i].Text = "";
+            }
+            allplayers.Clear();
+            player1.Clear();
+            player2.Clear();
+        }
         private void Winner_Click(object sender, EventArgs e)
         {
-            WinningRules status = new WinningRules();
-            //player1
-            status.isOnePair(player1);
-            status.isTwoPair(player1);
-            status.isThreeofaKind(player1);
-            status.isStraight (player1);
-            status.isFlush (player1);
-            status.isFullHouse (player1);
-            status.isFourofaKind (player1);
-            status.isStraightFlush (player1);
-            status.isRoyalFlush(player1);
-            //player2
-            status.isOnePair(player1);
-            status.isTwoPair(player1);
-            status.isThreeofaKind(player1);
-            status.isStraight(player1);
-            status.isFlush(player1);
-            status.isFullHouse(player1);
-            status.isFourofaKind(player1);
-            status.isStraightFlush(player1);
-            status.isRoyalFlush(player1);
+            PlayerRatings winner = new PlayerRatings((Deste.allcards()), player1, player2);
+            Controls["label" + 10].Text = winner.Compare();
+           
         }
     }
 }

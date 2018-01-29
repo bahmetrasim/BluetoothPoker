@@ -8,23 +8,42 @@ namespace BluetoothPoker
 {
     class WinningRules
     {
-        public WinningRules() { }
+        Dictionary<string, int> cards52 = new Dictionary<string, int>();
 
+        public WinningRules() { }
+        public WinningRules(Dictionary<string, int> cards52)
+        {
+            this.cards52 = cards52;
+        }
+
+        public Tuple<int, int> HighTwo(List<string> left)
+        {
+            List<int> valueslist = new List<int>();
+            foreach (var cards in left)
+            {
+                valueslist.Add(cards52[cards]);
+            }
+            valueslist.Sort();
+            return new Tuple<int, int>(valueslist[valueslist.Count - 1], valueslist[valueslist.Count - 2]);
+        }
         public int HighCard(List<string> el)
         {
             return 0;
         }
-        public Tuple<bool, int, int> isOnePair(List<string> el, int level = 1)
+        public Tuple<bool, int, int, int ,int> isOnePair(List<string> el, int level = 1)
         {
             el.Sort();
             for (int i = 0; i < el.Count - 1; i++)
             {
-                if (el[i].Substring(0, 1) == el[i + 1].Substring(0, 1))
+                if (cards52[el[i]] == cards52[el[i + 1]])
                 {
-                    return new Tuple<bool, int, int>(true, int.Parse(el[i].Substring(0, 1)), level);
+                    string paircard = el[i];
+                    el.Remove(el[i]);
+                    el.Remove(el[i]);                    
+                    return new Tuple<bool, int, int, int, int>(true, cards52[paircard], level, HighTwo(el).Item1, HighTwo(el).Item2);
                 }
             }
-            return new Tuple<bool, int, int>(false, 0, level);
+            return new Tuple<bool, int, int, int, int>(false, 0, level, 0, 0);
         }
         public Tuple<bool, int, int, int> isTwoPair(List<string> el, int level = 2)
         {

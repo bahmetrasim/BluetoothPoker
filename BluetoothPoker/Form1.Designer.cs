@@ -40,7 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Winner = new System.Windows.Forms.Button();
-            this.whowins = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Deal
@@ -143,20 +143,20 @@
             this.Winner.UseVisualStyleBackColor = true;
             this.Winner.Click += new System.EventHandler(this.Winner_Click);
             // 
-            // whowins
+            // label10
             // 
-            this.whowins.AutoSize = true;
-            this.whowins.Location = new System.Drawing.Point(98, 220);
-            this.whowins.Name = "whowins";
-            this.whowins.Size = new System.Drawing.Size(0, 13);
-            this.whowins.TabIndex = 12;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(98, 220);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 13);
+            this.label10.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.whowins);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.Winner);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -190,7 +190,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Winner;
-        private System.Windows.Forms.Label whowins;
+        private System.Windows.Forms.Label label10;
     }
 }
 

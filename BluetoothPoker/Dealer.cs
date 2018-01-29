@@ -13,6 +13,7 @@ namespace BluetoothPoker
     {
         Dictionary<string, int> full = new Dictionary<string, int>();
         Dictionary<string, int> left = new Dictionary<string, int>();
+
         public Dealer()
         {
             string kupa; //Heart
@@ -92,14 +93,21 @@ namespace BluetoothPoker
                     full.Add(maca, i);
                 }
             }
+            for (int i = 0; i < full.Count; i++)
+            {
+                left.Add(full.Keys.ElementAt(i), full.Values.ElementAt(i));
+            }
         }
-
+        public Dictionary<string, int> allcards()
+        {
+            return this.full;
+        }
         public string getcard()
         {
             Random num = new Random();
-            Thread.SpinWait(1000000);
-            string card =  full.Keys.ElementAt(num.Next(full.Count)).ToString();
-            full.Remove(card);
+            Thread.SpinWait(100000);
+            string card = left.Keys.ElementAt(num.Next(left.Count)).ToString();
+            left.Remove(card);
             return card;
         }
     }
