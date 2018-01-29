@@ -21,7 +21,7 @@ namespace BluetoothPoker
             {
                 if (el[i].Substring(0,1) == el[i+1].Substring(0,1))
                 {
-                    return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+                    return new Tuple<bool, int, int>(true, int.Parse(el[i].Substring(0,1)), level);
                 }
             }
             return new Tuple<bool, int, int>(false, 0, level);
@@ -37,14 +37,31 @@ namespace BluetoothPoker
             {
                 if (el[i].Substring(0,1) == el[i+1].Substring(0,1) && el[i].Substring(0,1) == el[i+2].Substring(0,1) )
                 {
-                    return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+                    return new Tuple<bool, int, int>(true, int.Parse(el[i].Substring(0,1)), level);
                 }
             }
             return new Tuple<bool, int,int>(false, 0,level);
         }
         public Tuple<bool, int, int> isStraight(List<string> el, int level=4)
         {
-            return new Tuple<bool, int, int>(false, 0,level);
+            // Dictionary'den Value'lere ihtiyaç var
+            el.sort();
+            int check = 0;
+            for (int i = 0; i<el.count-1; i++)
+            {
+                if (int.PArse(el[i].Substrin(0,1)) == int.PArse(el[i+1].Substrin(0,1)) -1)
+                {
+                    a++;
+                }
+            }
+            if ( a==4 )
+            {
+                return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+            }
+                else 
+                {
+                    return new Tuple<bool, int, int>(false, 0,level);
+                }
         }
         public Tuple<bool, int, int> isFlush(List<string> el, int level=5)
         {
@@ -65,7 +82,7 @@ namespace BluetoothPoker
             {
                 if (el[i].Substring(0,1) == el[i+1].Substring(0,1) && el[i].Substring(0,1) == el[i+2].Substring(0,1) && el[i].Substring(0,1) == el[i+3].Substring(0,1))
                 {
-                    return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+                    return new Tuple<bool, int, int>(true, int.Parse(el[i].Substring(0,1)), level);
                 }
             }
             
