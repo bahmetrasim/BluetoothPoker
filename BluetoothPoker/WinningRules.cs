@@ -60,7 +60,16 @@ namespace BluetoothPoker
         }
         public Tuple<bool, int, int, int> isFourofaKind(List<string> el, int level=7)
         {
-                return new Tuple<bool, int, int, int>(true, 3, 2, level);
+            el.sort();
+            for(int i = 0; i<el.count-3; i++)
+            {
+                if (el[i].Substring(0,1) == el[i+1].Substring(0,1) && el[i].Substring(0,1) == el[i+2].Substring(0,1) && el[i].Substring(0,1) == el[i+3].Substring(0,1))
+                {
+                    return new Tuple<bool, int, int>(true, el[i].Substring(0,1), level);
+                }
+            }
+            
+            return new Tuple<bool, int, int, int>(true, 3, 2, level);
         }
         public Tuple<bool, int, int> isStraightFlush(List<string> el, int level = 8)
         {
