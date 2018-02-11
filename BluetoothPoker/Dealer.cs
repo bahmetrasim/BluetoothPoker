@@ -110,6 +110,14 @@ namespace BluetoothPoker
             left.Remove(card);
             return card;
         }
+        public void resetcards()
+        {
+            left.Clear();
+            for (int i = 0; i < full.Count; i++)
+            {
+                left.Add(full.Keys.ElementAt(i), full.Values.ElementAt(i));
+            }
+        }
     }
 }
 

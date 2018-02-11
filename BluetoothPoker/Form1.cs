@@ -12,25 +12,41 @@ namespace BluetoothPoker
 {
     public partial class Form1 : Form
     {
-        List<string> player1 = new List<string>();
-        List<string> player2 = new List<string>();
+        List<string>[] players = new List<string>[9];
         Dealer Deste = new Dealer();
         List<List<string>> allplayers = new List<List<string>>();
         public Form1()
         {
             InitializeComponent();
         }
-
         private void Deal_Click(object sender, EventArgs e)
         {
             ResetForm();
-            for (int i = 0; i < 5; i++)
+            Deste.resetcards();
+            //Player 9 is Table and 5 cards
+            for (int i = 0; i < 9; i++)
             {
-                player1.Add(Deste.getcard());
-                player2.Add(Deste.getcard());
+                players[i] = new List<string>();
+                if (i<8)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        players[i].Add(Deste.getcard());
+                    } 
+                }
+                else
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        players[i].Add(Deste.getcard());
+                    }
+                }
+
             }
-            allplayers.Add(player1);
-            allplayers.Add(player2);
+            for (int i = 0; i < 9; i++)
+            {
+                allplayers.Add(players[i]);
+            }       
             UpdateForm(allplayers);
         }
         public void UpdateForm(List<List<string>> all)
@@ -38,36 +54,44 @@ namespace BluetoothPoker
             int playernumber = 0;
             do
             {
-                for (int i = 0; i < 5; i++)
+                if (playernumber == 8)
                 {
-                    Controls["label" + (playernumber * 5 + i)].Text = all[playernumber][i];
+                    for (int i = 0; i < 5; i++)
+                    {
+                        Controls["tlabel" + i].Text = all[playernumber][i];
+                    }
+                    playernumber++;
                 }
-                playernumber++;
+                else
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Controls["clabel" + (playernumber * 2 + i)].Text = all[playernumber][i];
+                    }
+                    playernumber++;
+                }
             }
             while (playernumber < allplayers.Count);
         }
-
         public void ResetForm()
         {
-            int labelnumber = -1;
-            foreach (Control vControl in Controls)
+            for (int i = 0; i < 16; i++)
             {
-                if (vControl is Label) labelnumber++;
-            }
-
-            for (int i = 0; i < labelnumber; i++)
-            {
-                Controls["label" + i].Text = "";
+                if (i < 5) Controls["tlabel" + i].Text = "";
+                Controls["clabel" + i].Text = "";
             }
             allplayers.Clear();
-            player1.Clear();
-            player2.Clear();
+            for (int i = 0; i < 9; i++)
+            {
+                if (players[i] != null) players[i].Clear();
+            }
         }
         private void Winner_Click(object sender, EventArgs e)
         {
-            PlayerRatings winner = new PlayerRatings((Deste.allcards()), player1, player2);
+            PlayerRatings winner = new PlayerRatings((Deste.allcards()), players[1], players[2]);
             Controls["label" + 10].Text = winner.Compare();
            
         }
+
     }
 }
