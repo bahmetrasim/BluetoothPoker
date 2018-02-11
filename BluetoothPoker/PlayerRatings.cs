@@ -18,7 +18,8 @@ namespace BluetoothPoker
         }
         public string Compare()
         {
-            playerresult(Player1);
+            List<string> abc = new List<string>( new string[] { "ahmet", "hüso"});
+            playerresult(abc);
             return "player1";
         }
         public Tuple<int, int, int, int, int> playerresult(List<string> players)

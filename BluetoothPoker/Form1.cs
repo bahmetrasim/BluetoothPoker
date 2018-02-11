@@ -58,15 +58,19 @@ namespace BluetoothPoker
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        Controls["tlabel" + i].Text = all[playernumber][i];
+                        //Controls["tlabel" + i].Text = all[playernumber][i];
+                        ((Label)Controls["tlabel" + i]).Image = resizeImage((Image)Properties.Resources.ResourceManager.GetObject("_" + all[playernumber][i]), ((Label)Controls["tlabel" + i]).Size);
+                       // ((Label)Controls["tlabel" + i]).Image.
                     }
+                    //tlabel0.Image = (Image)Properties.Resources.ResourceManager.GetObject(("_" + tlabel0.Text));
                     playernumber++;
                 }
                 else
                 {
                     for (int i = 0; i < 2; i++)
                     {
-                        Controls["clabel" + (playernumber * 2 + i)].Text = all[playernumber][i];
+                        //Controls["clabel" + (playernumber * 2 + i)].Text = all[playernumber][i];
+                        ((Label)Controls["clabel" + (playernumber * 2 + i)]).Image = resizeImage((Image)Properties.Resources.ResourceManager.GetObject("_" + all[playernumber][i]), ((Label)Controls["clabel" + (playernumber * 2 + i)]).Size);
                     }
                     playernumber++;
                 }
@@ -85,6 +89,10 @@ namespace BluetoothPoker
             {
                 if (players[i] != null) players[i].Clear();
             }
+        }
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
         }
         private void Winner_Click(object sender, EventArgs e)
         {

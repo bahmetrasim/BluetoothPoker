@@ -171,6 +171,7 @@
             // clabel0
             // 
             this.clabel0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.clabel0.Image = global::BluetoothPoker.Properties.Resources._10C;
             this.clabel0.Location = new System.Drawing.Point(170, 290);
             this.clabel0.Name = "clabel0";
             this.clabel0.Size = new System.Drawing.Size(47, 39);

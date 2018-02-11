@@ -25,10 +25,10 @@ namespace BluetoothPoker
             {
                 if (i == 10)
                 {
-                    kupa = "TH"; //Heart
-                    karo = "TD"; //Diamonds
-                    sinek = "TC"; //Clubs
-                    maca = "TS"; //Spades
+                    kupa = "10H"; //Heart
+                    karo = "10D"; //Diamonds
+                    sinek = "10C"; //Clubs
+                    maca = "10S"; //Spades
                     full.Add(kupa, i);
                     full.Add(karo, i);
                     full.Add(sinek, i);
