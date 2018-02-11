@@ -9,13 +9,11 @@ namespace BluetoothPoker
     class PlayerRatings
     {
         Dictionary<string, int> cards52 = new Dictionary<string, int>();
-        List<string> Player1 = new List<string>();
-        List<string> Player2 = new List<string>();
+        List<List<string>> allplayers = new List<List<string>>();    
         public PlayerRatings() { }
-        public PlayerRatings(Dictionary<string, int> cards52, List<string> player1, List<string> player2)
+        public PlayerRatings(Dictionary<string, int> cards52, List<List<string>> allplayers)
         {
-            this.Player1 = player1;
-            this.Player2 = player2;
+            this.allplayers = allplayers;
             this.cards52 = cards52;
         }
         public string Compare()
@@ -25,6 +23,7 @@ namespace BluetoothPoker
         }
         public Tuple<int, int, int, int, int> playerresult(List<string> players)
         { //1.int level, 2. int başlangıç 3.int ve two pair ve full house için, 4 int kalan en büyük
+
             List<Tuple<int, int, int, int, int>> onlytrue = new List<Tuple<int, int, int, int, int>>();
             WinningRules status = new WinningRules(cards52);
             Tuple<bool, int, int, int, int> revalue = status.isOnePair(players);

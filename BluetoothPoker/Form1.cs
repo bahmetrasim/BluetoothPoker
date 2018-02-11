@@ -88,7 +88,7 @@ namespace BluetoothPoker
         }
         private void Winner_Click(object sender, EventArgs e)
         {
-            PlayerRatings winner = new PlayerRatings((Deste.allcards()), players[1], players[2]);
+            PlayerRatings winner = new PlayerRatings((Deste.allcards()),allplayers);
             Controls["label" + 10].Text = winner.Compare();
            
         }
