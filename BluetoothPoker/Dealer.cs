@@ -13,7 +13,7 @@ namespace BluetoothPoker
     {
         Dictionary<string, int> full = new Dictionary<string, int>();
         Dictionary<string, int> left = new Dictionary<string, int>();
-
+        
         public Dealer()
         {
             string kupa; //Heart
@@ -93,6 +93,7 @@ namespace BluetoothPoker
                     full.Add(maca, i);
                 }
             }
+            WinningRules carddict = new WinningRules(full);
             for (int i = 0; i < full.Count; i++)
             {
                 left.Add(full.Keys.ElementAt(i), full.Values.ElementAt(i));

@@ -73,17 +73,17 @@
             // clabel2
             // 
             this.clabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel2.Location = new System.Drawing.Point(380, 290);
+            this.clabel2.Location = new System.Drawing.Point(380, 280);
             this.clabel2.Name = "clabel2";
-            this.clabel2.Size = new System.Drawing.Size(47, 39);
+            this.clabel2.Size = new System.Drawing.Size(47, 60);
             this.clabel2.TabIndex = 1;
             // 
             // clabel3
             // 
             this.clabel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel3.Location = new System.Drawing.Point(440, 290);
+            this.clabel3.Location = new System.Drawing.Point(440, 280);
             this.clabel3.Name = "clabel3";
-            this.clabel3.Size = new System.Drawing.Size(47, 39);
+            this.clabel3.Size = new System.Drawing.Size(47, 60);
             this.clabel3.TabIndex = 2;
             // 
             // clabel4
@@ -91,23 +91,23 @@
             this.clabel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel4.Location = new System.Drawing.Point(550, 250);
             this.clabel4.Name = "clabel4";
-            this.clabel4.Size = new System.Drawing.Size(47, 39);
+            this.clabel4.Size = new System.Drawing.Size(47, 60);
             this.clabel4.TabIndex = 3;
             // 
             // clabel5
             // 
             this.clabel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel5.Location = new System.Drawing.Point(550, 200);
+            this.clabel5.Location = new System.Drawing.Point(550, 190);
             this.clabel5.Name = "clabel5";
-            this.clabel5.Size = new System.Drawing.Size(47, 39);
+            this.clabel5.Size = new System.Drawing.Size(47, 60);
             this.clabel5.TabIndex = 4;
             // 
             // clabel6
             // 
             this.clabel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel6.Location = new System.Drawing.Point(550, 100);
+            this.clabel6.Location = new System.Drawing.Point(550, 110);
             this.clabel6.Name = "clabel6";
-            this.clabel6.Size = new System.Drawing.Size(47, 39);
+            this.clabel6.Size = new System.Drawing.Size(47, 60);
             this.clabel6.TabIndex = 5;
             // 
             // clabel11
@@ -115,7 +115,7 @@
             this.clabel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel11.Location = new System.Drawing.Point(170, 10);
             this.clabel11.Name = "clabel11";
-            this.clabel11.Size = new System.Drawing.Size(47, 39);
+            this.clabel11.Size = new System.Drawing.Size(47, 60);
             this.clabel11.TabIndex = 10;
             // 
             // clabel10
@@ -123,7 +123,7 @@
             this.clabel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel10.Location = new System.Drawing.Point(230, 10);
             this.clabel10.Name = "clabel10";
-            this.clabel10.Size = new System.Drawing.Size(47, 39);
+            this.clabel10.Size = new System.Drawing.Size(47, 60);
             this.clabel10.TabIndex = 9;
             // 
             // clabel9
@@ -131,7 +131,7 @@
             this.clabel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel9.Location = new System.Drawing.Point(380, 10);
             this.clabel9.Name = "clabel9";
-            this.clabel9.Size = new System.Drawing.Size(47, 39);
+            this.clabel9.Size = new System.Drawing.Size(47, 60);
             this.clabel9.TabIndex = 8;
             // 
             // clabel8
@@ -139,7 +139,7 @@
             this.clabel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel8.Location = new System.Drawing.Point(440, 10);
             this.clabel8.Name = "clabel8";
-            this.clabel8.Size = new System.Drawing.Size(47, 39);
+            this.clabel8.Size = new System.Drawing.Size(47, 60);
             this.clabel8.TabIndex = 7;
             // 
             // clabel7
@@ -147,7 +147,7 @@
             this.clabel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel7.Location = new System.Drawing.Point(550, 50);
             this.clabel7.Name = "clabel7";
-            this.clabel7.Size = new System.Drawing.Size(47, 39);
+            this.clabel7.Size = new System.Drawing.Size(47, 60);
             this.clabel7.TabIndex = 6;
             // 
             // Winner
@@ -171,18 +171,17 @@
             // clabel0
             // 
             this.clabel0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel0.Image = global::BluetoothPoker.Properties.Resources._10C;
-            this.clabel0.Location = new System.Drawing.Point(170, 290);
+            this.clabel0.Location = new System.Drawing.Point(170, 280);
             this.clabel0.Name = "clabel0";
-            this.clabel0.Size = new System.Drawing.Size(47, 39);
+            this.clabel0.Size = new System.Drawing.Size(47, 60);
             this.clabel0.TabIndex = 14;
             // 
             // clabel1
             // 
             this.clabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel1.Location = new System.Drawing.Point(230, 290);
+            this.clabel1.Location = new System.Drawing.Point(230, 280);
             this.clabel1.Name = "clabel1";
-            this.clabel1.Size = new System.Drawing.Size(47, 39);
+            this.clabel1.Size = new System.Drawing.Size(47, 60);
             this.clabel1.TabIndex = 13;
             // 
             // clabel12
@@ -190,23 +189,23 @@
             this.clabel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel12.Location = new System.Drawing.Point(50, 50);
             this.clabel12.Name = "clabel12";
-            this.clabel12.Size = new System.Drawing.Size(47, 39);
+            this.clabel12.Size = new System.Drawing.Size(47, 60);
             this.clabel12.TabIndex = 18;
             // 
             // clabel13
             // 
             this.clabel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel13.Location = new System.Drawing.Point(50, 100);
+            this.clabel13.Location = new System.Drawing.Point(50, 110);
             this.clabel13.Name = "clabel13";
-            this.clabel13.Size = new System.Drawing.Size(47, 39);
+            this.clabel13.Size = new System.Drawing.Size(47, 60);
             this.clabel13.TabIndex = 17;
             // 
             // clabel14
             // 
             this.clabel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.clabel14.Location = new System.Drawing.Point(50, 200);
+            this.clabel14.Location = new System.Drawing.Point(50, 190);
             this.clabel14.Name = "clabel14";
-            this.clabel14.Size = new System.Drawing.Size(47, 39);
+            this.clabel14.Size = new System.Drawing.Size(47, 60);
             this.clabel14.TabIndex = 16;
             // 
             // clabel15
@@ -214,7 +213,7 @@
             this.clabel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clabel15.Location = new System.Drawing.Point(50, 250);
             this.clabel15.Name = "clabel15";
-            this.clabel15.Size = new System.Drawing.Size(47, 39);
+            this.clabel15.Size = new System.Drawing.Size(47, 60);
             this.clabel15.TabIndex = 15;
             // 
             // tlabel0
@@ -222,7 +221,7 @@
             this.tlabel0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tlabel0.Location = new System.Drawing.Point(170, 150);
             this.tlabel0.Name = "tlabel0";
-            this.tlabel0.Size = new System.Drawing.Size(47, 39);
+            this.tlabel0.Size = new System.Drawing.Size(47, 60);
             this.tlabel0.TabIndex = 19;
             // 
             // tlabel1
@@ -230,7 +229,7 @@
             this.tlabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tlabel1.Location = new System.Drawing.Point(240, 150);
             this.tlabel1.Name = "tlabel1";
-            this.tlabel1.Size = new System.Drawing.Size(47, 39);
+            this.tlabel1.Size = new System.Drawing.Size(47, 60);
             this.tlabel1.TabIndex = 20;
             // 
             // tlabel2
@@ -238,7 +237,7 @@
             this.tlabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tlabel2.Location = new System.Drawing.Point(310, 150);
             this.tlabel2.Name = "tlabel2";
-            this.tlabel2.Size = new System.Drawing.Size(47, 39);
+            this.tlabel2.Size = new System.Drawing.Size(47, 60);
             this.tlabel2.TabIndex = 21;
             // 
             // tlabel3
@@ -246,7 +245,7 @@
             this.tlabel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tlabel3.Location = new System.Drawing.Point(380, 150);
             this.tlabel3.Name = "tlabel3";
-            this.tlabel3.Size = new System.Drawing.Size(47, 39);
+            this.tlabel3.Size = new System.Drawing.Size(47, 60);
             this.tlabel3.TabIndex = 22;
             // 
             // tlabel4
@@ -254,7 +253,7 @@
             this.tlabel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tlabel4.Location = new System.Drawing.Point(450, 150);
             this.tlabel4.Name = "tlabel4";
-            this.tlabel4.Size = new System.Drawing.Size(47, 39);
+            this.tlabel4.Size = new System.Drawing.Size(47, 60);
             this.tlabel4.TabIndex = 23;
             // 
             // plabel1
@@ -296,7 +295,7 @@
             // pmoney3
             // 
             this.pmoney3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.pmoney3.Location = new System.Drawing.Point(600, 220);
+            this.pmoney3.Location = new System.Drawing.Point(613, 220);
             this.pmoney3.Name = "pmoney3";
             this.pmoney3.Size = new System.Drawing.Size(45, 20);
             this.pmoney3.TabIndex = 29;
@@ -306,7 +305,7 @@
             // 
             this.plabel3.AllowDrop = true;
             this.plabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.plabel3.Location = new System.Drawing.Point(600, 270);
+            this.plabel3.Location = new System.Drawing.Point(613, 270);
             this.plabel3.Name = "plabel3";
             this.plabel3.Size = new System.Drawing.Size(45, 20);
             this.plabel3.TabIndex = 28;

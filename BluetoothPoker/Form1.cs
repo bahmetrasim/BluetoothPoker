@@ -48,6 +48,8 @@ namespace BluetoothPoker
                 allplayers.Add(players[i]);
             }       
             UpdateForm(allplayers);
+            PlayerRatings FinalCards = new PlayerRatings((Deste.allcards()), allplayers);
+            FinalCards.PlayerCardswithTable();
         }
         public void UpdateForm(List<List<string>> all)
         {
@@ -96,8 +98,8 @@ namespace BluetoothPoker
         }
         private void Winner_Click(object sender, EventArgs e)
         {
-            PlayerRatings winner = new PlayerRatings((Deste.allcards()),allplayers);
-            Controls["label" + 10].Text = winner.Compare();
+            
+            //Controls["label" + 10].Text = winner.Compare();
            
         }
 

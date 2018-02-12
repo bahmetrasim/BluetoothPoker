@@ -64,7 +64,6 @@ namespace BluetoothPoker
         public Tuple<bool, int, int> isStraight(List<string> el, int level = 4)
         {
             // Dictionary'den Value'lere ihtiyaç var
-            el.Sort();
             int check = 0;
             for (int i = 0; i < el.Count - 1; i++)
             {
