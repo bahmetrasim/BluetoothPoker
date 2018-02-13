@@ -11,16 +11,21 @@ namespace BluetoothPoker
         Dictionary<string, int> cards52 = new Dictionary<string, int>();
         List<List<string>> allplayers = new List<List<string>>();
         WinningRules status = new WinningRules();
+        Dictionary<List<string>, int>[] PlayerDic = new Dictionary<List<string>, int>[8];
+
+
         public PlayerRatings() { }
+
         public PlayerRatings(Dictionary<string, int> cards52, List<List<string>> allplayers)
         {
             this.allplayers = allplayers;
             this.cards52 = cards52;
+            status = new WinningRules(this.cards52);
         }
         public string Compare()
         {
             List<string> abc = new List<string>(new string[] { "ahmet", "hüso" });
-            playerresult(abc);
+            //playerresult(abc);
             return "player1";
         }
         public void PlayerCardswithTable()
@@ -30,7 +35,9 @@ namespace BluetoothPoker
                 if (allplayers[i].Count > 0)
                 {
                     allplayers[i].AddRange(allplayers[8]);
-                    allplayers[i] = BestofFive(allplayers[i]);
+                    allplayers[i] = BestofFive(allplayers[i]).Item1;
+                    PlayerDic[i] = new Dictionary<List<string>, int>();
+                    PlayerDic[i].Add(allplayers[i], BestofFive(allplayers[i]).Item2);
                 }
                 else
                 {
@@ -38,71 +45,71 @@ namespace BluetoothPoker
                 }
             }
         }
-        public Tuple<int, int, int, int, int> playerresult(List<string> players)
-        { //1.int level, 2. int başlangıç 3.int ve two pair ve full house için, 4 int kalan en büyük
+        //public Tuple<int, int, int, int, int> playerresult(List<string> players)
+        //{ //1.int level, 2. int başlangıç 3.int ve two pair ve full house için, 4 int kalan en büyük
 
-            List<Tuple<int, int, int, int, int>> onlytrue = new List<Tuple<int, int, int, int, int>>();
-            WinningRules status = new WinningRules(cards52);
-            Tuple<bool, int, int, int, int> revalue = status.isOnePair(players);
-            if (revalue.Item1 == true)
-            {
+        //    List<Tuple<int, int, int, int, int>> onlytrue = new List<Tuple<int, int, int, int, int>>();
+        //    WinningRules status = new WinningRules(cards52);
+        //    Tuple<bool, int, int, int, int> revalue = status.isOnePair(players);
+        //    if (revalue.Item1 == true)
+        //    {
 
-                onlytrue.Add(new Tuple<int, int, int, int, int>(revalue.Item3, revalue.Item2, revalue.Item4, revalue.Item5, 0));
-            }
+        //        onlytrue.Add(new Tuple<int, int, int, int, int>(revalue.Item3, revalue.Item2, revalue.Item4, revalue.Item5, 0));
+        //    }
 
-            status.isTwoPair(players);
-            status.isThreeofaKind(players);
-            status.isStraight(players);
-            status.isFlush(players);
-            status.isFullHouse(players);
-            status.isFourofaKind(players);
-            status.isStraightFlush(players);
-            status.isRoyalFlush(players);
+        //    status.isTwoPair(players);
+        //    status.isThreeofaKind(players);
+        //    status.isStraight(players);
+        //    status.isFlush(players);
+        //    status.isFullHouse(players);
+        //    status.isFourofaKind(players);
+        //    status.isStraightFlush(players);
+        //    status.isRoyalFlush(players);
 
-            return new Tuple<int, int, int, int, int>(3, 2, 10, 12, 13);
-        }
-        public List<string> BestofFive(List<string> player)
+        //    return new Tuple<int, int, int, int, int>(3, 2, 10, 12, 13);
+        //}
+        public Tuple <List<string>, int> BestofFive(List<string> player)
         {
             player = SortbyDic(player);
             if (status.isRoyalFlush(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isStraightFlush(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isFourofaKind(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isFullHouse(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isFlush(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
-            else if (status.isStraight(player).Item1)
+            else if (status.isStraight(player).Item1) //OK
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isThreeofaKind(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isTwoPair(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isOnePair(player).Item1)
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else
             {
-                return player;
+                return new Tuple<List<string>, int>(status.isStraight(player).Item2, 0);
             }
         }
         public List<string> SortbyDic (List<string> list)
@@ -113,16 +120,22 @@ namespace BluetoothPoker
             {
                 temp.Add(list[i], cards52[list[i]]);
             }
-            list.Clear();
+            //list.Clear();
             // Denenecek
-            //temp = temp.OrderByDescending(u => u.Value).ToDictionary(z => z.Key, y => y.Value);
+           temp = temp.OrderByDescending(u => u.Value).ToDictionary(z => z.Key, y => y.Value);
 
-            foreach (KeyValuePair<string, int> sort in temp.OrderByDescending(key => key.Value))
-            {
-               list.Add(sort.Key);
-            }
-            return list;
+            return temp.Keys.ToList();
+            //foreach (KeyValuePair<string, int> sort in temp.OrderByDescending(key => key.Value))
+            //{
+            //   list.Add(sort.Key);
+            //}
+            //return list;
 
+        }
+        public void playerstatus(int index, List<string> players, int level)
+        {
+           
+            PlayerDic[index].Add(players, level);
         }
     }
 }

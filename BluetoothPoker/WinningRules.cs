@@ -30,57 +30,90 @@ namespace BluetoothPoker
         {
             return 0;
         }
-        public Tuple<bool, int, int, int ,int> isOnePair(List<string> el, int level = 1)
+        public Tuple<bool, List<string>, int> isOnePair(List<string> el, int level = 1)
         {
-            el.Sort();
+            List<string> temp = new List<string>();
             for (int i = 0; i < el.Count - 1; i++)
             {
                 if (cards52[el[i]] == cards52[el[i + 1]])
                 {
-                    string paircard = el[i];
-                    el.Remove(el[i]);
-                    el.Remove(el[i]);                    
-                    return new Tuple<bool, int, int, int, int>(true, cards52[paircard], level, HighTwo(el).Item1, HighTwo(el).Item2);
+                    if (temp.Count == 0)
+                    {
+                        temp.Add(el[i]);
+                        temp.Add(el[i + 1]);
+                    }
+                    else { temp.Add(el[i + 1]); }
                 }
             }
-            return new Tuple<bool, int, int, int, int>(false, 0, level, 0, 0);
-        }
-        public Tuple<bool, int, int, int> isTwoPair(List<string> el, int level = 2)
-        {
-            return new Tuple<bool, int, int, int>(false, 0, 1, level);
-        }
-        public Tuple<bool, int, int> isThreeofaKind(List<string> el, int level = 3)
-        {
-            el.Sort();
-            for (int i = 0; i < el.Count - 2; i++)
+            if (temp.Count == 2)
             {
-                if (el[i].Substring(0, 1) == el[i + 1].Substring(0, 1) && el[i].Substring(0, 1) == el[i + 2].Substring(0, 1))
-                {
-                    return new Tuple<bool, int, int>(true, int.Parse(el[i].Substring(0, 1)), level);
-                }
+                temp.AddRange(removedublicates(el).GetRange(0, 3));
+                return new Tuple<bool, List<string>, int>(true, temp, level);
             }
-            return new Tuple<bool, int, int>(false, 0, level);
-        }
-        public Tuple<bool, int, int> isStraight(List<string> el, int level = 4)
+
+            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+        } //ok
+        public Tuple<bool, List<string>, int> isTwoPair(List<string> el, int level = 2) 
         {
-            // Dictionary'den Value'lere ihtiyaç var
-            int check = 0;
+            List<string> temp = new List<string>();
             for (int i = 0; i < el.Count - 1; i++)
             {
-                if (int.Parse(el[i].Substring(0, 1)) == int.Parse(el[i + 1].Substring(0, 1)) - 1)
+                if (cards52[el[i]] == cards52[el[i + 1]])
                 {
-                    check++;
+                    if (temp.Count == 0)
+                    {
+                        temp.Add(el[i]);
+                        temp.Add(el[i + 1]);
+                    }
+                    else { temp.Add(el[i + 1]); }
                 }
             }
-            if (check == 4)
+            if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
             {
-                return new Tuple<bool, int, int>(true, int.Parse(el[0].Substring(0, 1)), level);
+                temp.AddRange(removedublicates(el).GetRange(0, 1));
+                return new Tuple<bool, List<string>, int>(true, temp, level);
             }
-            else
+            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+        }  ////Eğer temp count 6 olursa yani 3 pair varsa en büyük ikisini al
+        public Tuple<bool, List<string>, int> isThreeofaKind(List<string> el, int level = 3)
+        {
+            List<string> temp = new List<string>();
+            for (int i = 0; i < el.Count - 2; i++)
             {
-                return new Tuple<bool, int, int>(false, 0, level);
+                if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]])
+                {
+                    temp.AddRange(el.GetRange(i, 3));
+                    temp.AddRange(removedublicates(el).GetRange(0, 2));
+                    return new Tuple<bool, List<string>, int>(true, temp, level);
+                }
             }
-        }
+            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+        }  //Eğer temp count 6 olursa yani 2 pair varsa en büyük ikisini al
+        public Tuple<bool, List<string>, int> isStraight(List<string> el, int level = 4)
+        {
+            // Dictionary'den Value'lere ihtiyaç var
+            List<string> temp = new List<string>();
+            el = removedublicates(el);
+            for (int i = 0; i < el.Count - 1; i++)
+            {
+                if (cards52[el[i]] == cards52[el[i + 1]] + 1)
+                {
+                    if (temp.Count == 0)
+                    {
+                        temp.Add(el[i]);
+                        temp.Add(el[i + 1]);
+                    }
+                    else { temp.Add(el[i + 1]); }
+                }
+                else { temp.Clear(); }
+            }
+            if (temp.Count > 4)
+            {
+                return new Tuple<bool, List<string>, int>(true, temp.GetRange(0, 5), level);
+            }
+            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+
+        } //ok
         public Tuple<bool, int, int> isFlush(List<string> el, int level = 5)
         {
             return new Tuple<bool, int, int>(false, 0, level); //return with highest Value
@@ -93,19 +126,20 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, int, int, int>(false, 0, 0, level);
         }
-        public Tuple<bool, int, int> isFourofaKind(List<string> el, int level = 7)
+        public Tuple<bool, List<string>, int> isFourofaKind(List<string> el, int level = 7)
         {
-            el.Sort();
-            for (int i = 0; i < el.Count - 3; i++)
+            List<string> temp = new List<string>();
+            for (int i = 0; i < el.Count - 2; i++)
             {
-                if (el[i].Substring(0, 1) == el[i + 1].Substring(0, 1) && el[i].Substring(0, 1) == el[i + 2].Substring(0, 1) && el[i].Substring(0, 1) == el[i + 3].Substring(0, 1))
+                if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]] && cards52[el[i]] == cards52[el[i + 3]])
                 {
-                    return new Tuple<bool, int, int>(true, int.Parse(el[0].Substring(0, 1)), level);
+                    temp.AddRange(el.GetRange(i, 4));
+                    temp.AddRange(removedublicates(el).GetRange(0, 1));
+                    return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
-
-            return new Tuple<bool, int, int>(true, 3, level);
-        }
+            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+        }  //OK Kontrol Et
         public Tuple<bool, int, int> isStraightFlush(List<string> el, int level = 8)
         {
             if (isStraight(el).Item1 == true && isFlush(el).Item1 == true)
@@ -122,5 +156,31 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, int, int>(false, 0, level);
         }
+        public List<string> removedublicates(List<string> el)
+        {
+            for (int i = 0; i < el.Count - 1; i++)
+            {
+                for (int j = i + 1; j < el.Count; j++)
+                {
+                    if (cards52[el[i]] == cards52[el[j]])
+                    {
+                        el.RemoveAt(j);
+                    }
+                }
+            }
+            return el;
+        }
+        public List<string> removedublicateall(List<string> el)
+        {
+            for (int i = 0; i < el.Count - 1; i++)
+            {
+                    if (cards52[el[i]] == cards52[el[i+1]])
+                    {
+                        el.RemoveAt(i+1);
+                    }
+            }
+            return el;
+        }
+
     }
 }
