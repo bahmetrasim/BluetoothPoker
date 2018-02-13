@@ -47,7 +47,7 @@ namespace BluetoothPoker
             }
             if (temp.Count == 2)
             {
-                temp.AddRange(removedublicates(el).GetRange(0, 3));
+                temp.AddRange(removedublicateall(el).GetRange(0, 3));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
 
@@ -70,7 +70,7 @@ namespace BluetoothPoker
             }
             if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
             {
-                temp.AddRange(removedublicates(el).GetRange(0, 1));
+                temp.AddRange(removedublicateall(el).GetRange(0, 1));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
             return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
@@ -83,7 +83,7 @@ namespace BluetoothPoker
                 if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]])
                 {
                     temp.AddRange(el.GetRange(i, 3));
-                    temp.AddRange(removedublicates(el).GetRange(0, 2));
+                    temp.AddRange(removedublicateall(el).GetRange(0, 2));
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
@@ -134,7 +134,7 @@ namespace BluetoothPoker
                 if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]] && cards52[el[i]] == cards52[el[i + 3]])
                 {
                     temp.AddRange(el.GetRange(i, 4));
-                    temp.AddRange(removedublicates(el).GetRange(0, 1));
+                    temp.AddRange(removedublicateall(el).GetRange(0, 1));
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
