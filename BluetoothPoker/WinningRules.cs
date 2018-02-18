@@ -26,9 +26,9 @@ namespace BluetoothPoker
             valueslist.Sort();
             return new Tuple<int, int>(valueslist[valueslist.Count - 1], valueslist[valueslist.Count - 2]);
         }
-        public int HighCard(List<string> el)
+        public List<string> HighCard (List<string> el)
         {
-            return 0;
+            return el.GetRange(0, 3);
         }
         public Tuple<bool, List<string>, int> isOnePair(List<string> el, int level = 1)
         {
@@ -45,35 +45,55 @@ namespace BluetoothPoker
                     else { temp.Add(el[i + 1]); }
                 }
             }
-            if (temp.Count == 2)
+            if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
-                temp.AddRange(removedublicateall(el).GetRange(0, 3));
+                el.Add(temp[4]);
+                temp.RemoveRange(4, 2);
+                el = SortbyDic(el);
+                temp.AddRange(removedublicateall(el).GetRange(0, 1));
+                return new Tuple<bool, List<string>, int>(true, temp, level);
+            }
+            else if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
+            {
+                temp.AddRange(removedublicateall(el).GetRange(0, 1));
+                return new Tuple<bool, List<string>, int>(true, temp, level);
+            }
+            else if (temp.Count == 2)
+            {
+                SortbyDic(removedublicateall(el));
+                temp.AddRange(el.GetRange(0, 3));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
 
-            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+            return new Tuple<bool, List<string>, int>(false, el, level);
         } //ok
-        public Tuple<bool, List<string>, int> isTwoPair(List<string> el, int level = 2) 
+        public Tuple<bool, List<string>, int> isTwoPair(List<string> el, int level = 2)
         {
             List<string> temp = new List<string>();
             for (int i = 0; i < el.Count - 1; i++)
             {
                 if (cards52[el[i]] == cards52[el[i + 1]])
                 {
-                    if (temp.Count == 0)
-                    {
                         temp.Add(el[i]);
                         temp.Add(el[i + 1]);
-                    }
-                    else { temp.Add(el[i + 1]); }
+                    i++;
                 }
             }
-            if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
+            if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
+                el.Add(temp[4]);
+                temp.RemoveRange(4, 2);
+                el = SortbyDic(el);
                 temp.AddRange(removedublicateall(el).GetRange(0, 1));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
-            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+            else if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
+            {
+                SortbyDic(removedublicateall(el));
+                temp.AddRange(el.GetRange(0,1));
+                return new Tuple<bool, List<string>, int>(true, temp, level);
+            }
+            return new Tuple<bool, List<string>, int>(false, el, level);
         }  ////Eğer temp count 6 olursa yani 3 pair varsa en büyük ikisini al
         public Tuple<bool, List<string>, int> isThreeofaKind(List<string> el, int level = 3)
         {
@@ -87,23 +107,25 @@ namespace BluetoothPoker
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
-            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+            return new Tuple<bool, List<string>, int>(false, el, level);
         }  //Eğer temp count 6 olursa yani 2 pair varsa en büyük ikisini al
         public Tuple<bool, List<string>, int> isStraight(List<string> el, int level = 4)
         {
             // Dictionary'den Value'lere ihtiyaç var
             List<string> temp = new List<string>();
-            el = removedublicates(el);
-            for (int i = 0; i < el.Count - 1; i++)
+            List<string> el1 = new List<string>();
+            el1.AddRange(el);
+           removedublicates(el1);
+            for (int i = 0; i < el1.Count - 1; i++)
             {
-                if (cards52[el[i]] == cards52[el[i + 1]] + 1)
+                if (cards52[el1[i]] == cards52[el1[i + 1]] + 1)
                 {
                     if (temp.Count == 0)
                     {
-                        temp.Add(el[i]);
-                        temp.Add(el[i + 1]);
+                        temp.Add(el1[i]);
+                        temp.Add(el1[i + 1]);
                     }
-                    else { temp.Add(el[i + 1]); }
+                    else { temp.Add(el1[i + 1]); }
                 }
                 else { temp.Clear(); }
             }
@@ -111,7 +133,7 @@ namespace BluetoothPoker
             {
                 return new Tuple<bool, List<string>, int>(true, temp.GetRange(0, 5), level);
             }
-            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+            return new Tuple<bool, List<string>, int>(false, el, level);
 
         } //ok
         public Tuple<bool, int, int> isFlush(List<string> el, int level = 5)
@@ -138,7 +160,7 @@ namespace BluetoothPoker
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
-            return new Tuple<bool, List<string>, int>(false, el.GetRange(0, 5), level);
+            return new Tuple<bool, List<string>, int>(false, el, level);
         }  //OK Kontrol Et
         public Tuple<bool, int, int> isStraightFlush(List<string> el, int level = 8)
         {
@@ -156,30 +178,60 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, int, int>(false, 0, level);
         }
-        public List<string> removedublicates(List<string> el)
+        public List<string> removedublicates(List<string> del)
         {
-            for (int i = 0; i < el.Count - 1; i++)
+            for (int i = 0; i < del.Count - 1; i++)
             {
-                for (int j = i + 1; j < el.Count; j++)
+                for (int j = i + 1; j < del.Count; j++)
                 {
-                    if (cards52[el[i]] == cards52[el[j]])
+                    if (cards52[del[i]] == cards52[del[j]])
                     {
-                        el.RemoveAt(j);
+                        del.RemoveAt(j);
                     }
                 }
             }
-            return el;
+            return del;
         }
         public List<string> removedublicateall(List<string> el)
         {
             for (int i = 0; i < el.Count - 1; i++)
             {
-                    if (cards52[el[i]] == cards52[el[i+1]])
+                int count = 0;
+                for (int j = i + 1; j < el.Count; j++)
+                {
+                    if (cards52[el[i]] == cards52[el[j]])
                     {
-                        el.RemoveAt(i+1);
+                        el.Remove(el[j]);
+                        count++;
                     }
+                }
+                if (count !=0)
+                {
+                    el.Remove(el[i]);
+                    i--;
+                }
             }
             return el;
+        }
+        public List<string> SortbyDic(List<string> list)
+        {
+            Dictionary<string, int> temp = new Dictionary<string, int>();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                temp.Add(list[i], cards52[list[i]]);
+            }
+            //list.Clear();
+            // Denenecek
+            temp = temp.OrderByDescending(u => u.Value).ToDictionary(z => z.Key, y => y.Value);
+
+            return temp.Keys.ToList();
+            //foreach (KeyValuePair<string, int> sort in temp.OrderByDescending(key => key.Value))
+            //{
+            //   list.Add(sort.Key);
+            //}
+            //return list;
+
         }
 
     }

@@ -71,45 +71,45 @@ namespace BluetoothPoker
         public Tuple <List<string>, int> BestofFive(List<string> player)
         {
             player = SortbyDic(player);
-            if (status.isRoyalFlush(player).Item1)
+            //if (status.isRoyalFlush(player).Item1)
+            //{
+            //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+            //}
+            //else if (status.isStraightFlush(player).Item1)
+            //{
+            //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+            //}
+            if (status.isFourofaKind(player).Item1)
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+                return new Tuple<List<string>, int>(status.isFourofaKind(player).Item2, status.isFourofaKind(player).Item3);
             }
-            else if (status.isStraightFlush(player).Item1)
-            {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
-            }
-            else if (status.isFourofaKind(player).Item1)
-            {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
-            }
-            else if (status.isFullHouse(player).Item1)
-            {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
-            }
-            else if (status.isFlush(player).Item1)
-            {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
-            }
+            //else if (status.isFullHouse(player).Item1)
+            //{
+            //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+            //}
+            //else if (status.isFlush(player).Item1)
+            //{
+            //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+            //}
             else if (status.isStraight(player).Item1) //OK
             {
                 return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             }
             else if (status.isThreeofaKind(player).Item1)
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+                return new Tuple<List<string>, int>(status.isThreeofaKind(player).Item2, status.isThreeofaKind(player).Item3);
             }
             else if (status.isTwoPair(player).Item1)
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+                return new Tuple<List<string>, int>(status.isTwoPair(player).Item2, status.isTwoPair(player).Item3);
             }
-            else if (status.isOnePair(player).Item1)
+            else if (status.isOnePair(player).Item1) 
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+                return new Tuple<List<string>, int>(status.isOnePair(player).Item2, status.isOnePair(player).Item3);
             }
             else
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, 0);
+                return new Tuple<List<string>, int>(status.HighCard(player), 0);
             }
         }
         public List<string> SortbyDic (List<string> list)
