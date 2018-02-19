@@ -12,7 +12,7 @@ namespace BluetoothPoker
         List<List<string>> allplayers = new List<List<string>>();
         WinningRules status = new WinningRules();
         Dictionary<List<string>, int>[] PlayerDic = new Dictionary<List<string>, int>[8];
-
+        Tuple<List<string>, int>[] PlayerTuple = new Tuple<List<string>, int>[8];
 
         public PlayerRatings() { }
 
@@ -35,9 +35,10 @@ namespace BluetoothPoker
                 if (allplayers[i].Count > 0)
                 {
                     allplayers[i].AddRange(allplayers[8]);
-                    allplayers[i] = BestofFive(allplayers[i]).Item1;
+                    PlayerTuple[i] = BestofFive(allplayers[i]);
+                    allplayers[i] = PlayerTuple[i].Item1;
                     PlayerDic[i] = new Dictionary<List<string>, int>();
-                    PlayerDic[i].Add(allplayers[i], BestofFive(allplayers[i]).Item2);
+                    PlayerDic[i].Add(allplayers[i], PlayerTuple[i].Item2);
                 }
                 else
                 {
@@ -71,15 +72,27 @@ namespace BluetoothPoker
         public Tuple <List<string>, int> BestofFive(List<string> player)
         {
             player = SortbyDic(player);
-            Tuple<bool, List<string>, int> RoyalFlush = status.isRoyalFlush(player);
-            Tuple<bool, List<string>, int> StraightFlush = status.isStraightFlush(player);
-            Tuple<bool, List<string>, int> FourofaKind = status.isFourofaKind(player);
-            Tuple<bool, List<string>, int> FullHouse = status.isFullHouse(player);
-            Tuple<bool, List<string>, int> isFlush = status.isFlush(player);
-            Tuple<bool, List<string>, int> Straight = status.isStraight(player);
-            Tuple<bool, List<string>, int> ThreeofaKind  = status.isThreeofaKind(player);
-            Tuple<bool, List<string>, int> TwoPair = status.isTwoPair(player);
-            Tuple<bool, List<string>, int> OnePair = status.isOnePair(player);
+            for (int i = 0; i < 1; i++)
+            {
+                //Tuple<bool, List<string>, int> RoyalFlush = status.isRoyalFlush(player);
+                //if (RoyalFlush.Item1){ break; }
+                //Tuple<bool, List<string>, int> StraightFlush = status.isStraightFlush(player);
+                //if (StraightFlush.Item1) { break; }
+                Tuple<bool, List<string>, int> FourofaKind = status.isFourofaKind(player);
+                if (FourofaKind.Item1) { break; }
+                //Tuple<bool, List<string>, int> FullHouse = status.isFullHouse(player);
+                //if (FullHouse.Item1) { break; }
+                //Tuple<bool, List<string>, int> Flush = status.isFlush(player);
+                //if (Flush.Item1) { break; }
+                Tuple<bool, List<string>, int> Straight = status.isStraight(player);
+                if (Straight.Item1) { break; }
+                Tuple<bool, List<string>, int> ThreeofaKind  = status.isThreeofaKind(player);
+                if (ThreeofaKind.Item1) { break; }
+                Tuple<bool, List<string>, int> TwoPair = status.isTwoPair(player);
+                if (TwoPair.Item1) { break; }
+                Tuple<bool, List<string>, int> OnePair = status.isOnePair(player);
+                if (OnePair.Item1) { break; }
+            }
 
             //if (status.isRoyalFlush(player).Item1)
             //{
@@ -89,9 +102,9 @@ namespace BluetoothPoker
             //{
             //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             //}
-            if (status.isFourofaKind(player).Item1)
+            if (FourofaKind.Item1)
             {
-                return new Tuple<List<string>, int>(status.isFourofaKind(player).Item2, status.isFourofaKind(player).Item3);
+                return new Tuple<List<string>, int>(FourofaKind.Item2, FourofaKind.Item3);
             }
             //else if (status.isFullHouse(player).Item1)
             //{
@@ -101,21 +114,21 @@ namespace BluetoothPoker
             //{
             //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
             //}
-            else if (status.isStraight(player).Item1) //OK
+            else if (Straight.Item1) //OK
             {
-                return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
+                return new Tuple<List<string>, int>(Straight.Item2, Straight.Item3);
             }
-            else if (status.isThreeofaKind(player).Item1)
+            else if (ThreeofaKind.Item1)
             {
-                return new Tuple<List<string>, int>(status.isThreeofaKind(player).Item2, status.isThreeofaKind(player).Item3);
+                return new Tuple<List<string>, int>(ThreeofaKind.Item2, ThreeofaKind.Item3);
             }
-            else if (status.isTwoPair(player).Item1)
+            else if (TwoPair.Item1)
             {
-                return new Tuple<List<string>, int>(status.isTwoPair(player).Item2, status.isTwoPair(player).Item3);
+                return new Tuple<List<string>, int>(TwoPair.Item2, TwoPair.Item3);
             }
-            else if (status.isOnePair(player).Item1) 
+            else if (OnePair.Item1) 
             {
-                return new Tuple<List<string>, int>(status.isOnePair(player).Item2, status.isOnePair(player).Item3);
+                return new Tuple<List<string>, int>(OnePair.Item2, OnePair.Item3);
             }
             else
             {

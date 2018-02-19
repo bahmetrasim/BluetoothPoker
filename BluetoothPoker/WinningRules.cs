@@ -28,7 +28,7 @@ namespace BluetoothPoker
         }
         public List<string> HighCard (List<string> el)
         {
-            return el.GetRange(0, 3);
+            return el.GetRange(0, 5);
         }
         public Tuple<bool, List<string>, int> isOnePair(List<string> el, int level = 1)
         {
