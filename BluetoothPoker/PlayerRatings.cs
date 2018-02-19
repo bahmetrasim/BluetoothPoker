@@ -71,6 +71,16 @@ namespace BluetoothPoker
         public Tuple <List<string>, int> BestofFive(List<string> player)
         {
             player = SortbyDic(player);
+            Tuple<bool, List<string>, int> RoyalFlush = status.isRoyalFlush(player);
+            Tuple<bool, List<string>, int> StraightFlush = status.isStraightFlush(player);
+            Tuple<bool, List<string>, int> FourofaKind = status.isFourofaKind(player);
+            Tuple<bool, List<string>, int> FullHouse = status.isFullHouse(player);
+            Tuple<bool, List<string>, int> isFlush = status.isFlush(player);
+            Tuple<bool, List<string>, int> Straight = status.isStraight(player);
+            Tuple<bool, List<string>, int> ThreeofaKind  = status.isThreeofaKind(player);
+            Tuple<bool, List<string>, int> TwoPair = status.isTwoPair(player);
+            Tuple<bool, List<string>, int> OnePair = status.isOnePair(player);
+
             //if (status.isRoyalFlush(player).Item1)
             //{
             //    return new Tuple<List<string>, int>(status.isStraight(player).Item2, status.isStraight(player).Item3);
