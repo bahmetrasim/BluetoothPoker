@@ -48,18 +48,20 @@ namespace BluetoothPoker
             if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
                 temp.RemoveRange(4, 2);
-                el = SortbyDic(el);
-                temp.AddRange(removedublicateall(el).GetRange(0, 1));
+                SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
+                temp.AddRange(el.GetRange(0, 3));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
             else if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
             {
-                temp.AddRange(removedublicateall(el).GetRange(0, 1));
+                temp.RemoveRange(2, 4);
+                SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
+                temp.AddRange(el.GetRange(0, 3));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
             else if (temp.Count == 2)
             {
-                SortbyDic(removedublicateall(el));
+                SortbyDic(removepairs(el, cards52[temp[1]]));
                 temp.AddRange(el.GetRange(0, 3));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
