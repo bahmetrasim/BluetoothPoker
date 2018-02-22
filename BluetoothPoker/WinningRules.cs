@@ -81,15 +81,15 @@ namespace BluetoothPoker
             }
             if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
-                el.Add(temp[4]);
+                el.Add(temp[4]);/*----Buraya Bak*/
                 temp.RemoveRange(4, 2);
-                el = SortbyDic(el);
+                SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
                 temp.AddRange(removedublicateall(el).GetRange(0, 1));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
             else if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
             {
-                SortbyDic(removedublicateall(el));
+                SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
                 temp.AddRange(el.GetRange(0,1));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
@@ -103,7 +103,8 @@ namespace BluetoothPoker
                 if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]])
                 {
                     temp.AddRange(el.GetRange(i, 3));
-                    temp.AddRange(removedublicateall(el).GetRange(0, 2));
+                    SortbyDic(removepairs(el, cards52[el[i]]));
+                    temp.AddRange(el.GetRange(0, 2));
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
@@ -151,12 +152,13 @@ namespace BluetoothPoker
         public Tuple<bool, List<string>, int> isFourofaKind(List<string> el, int level = 7)
         {
             List<string> temp = new List<string>();
-            for (int i = 0; i < el.Count - 2; i++)
+            for (int i = 0; i < el.Count -3 ; i++)
             {
                 if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]] && cards52[el[i]] == cards52[el[i + 3]])
                 {
                     temp.AddRange(el.GetRange(i, 4));
-                    temp.AddRange(removedublicateall(el).GetRange(0, 1));
+                    SortbyDic(removepairs(el, cards52[el[i]]));
+                    temp.AddRange(el.GetRange(0, 1));
                     return new Tuple<bool, List<string>, int>(true, temp, level);
                 }
             }
@@ -212,6 +214,18 @@ namespace BluetoothPoker
                 }
             }
             return el;
+        }
+        public List<string> removepairs(List<string> del, int a, int b =0)
+        {
+            for (int i = 0; i < del.Count; i++)
+            {
+                if (cards52[del[i]] == a || cards52[del[i]] == b)
+                {
+                    del.Remove(del[i]);
+                    i--;
+                }
+            }
+            return del;
         }
         public List<string> SortbyDic(List<string> list)
         {

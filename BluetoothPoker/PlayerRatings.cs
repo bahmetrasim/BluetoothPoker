@@ -11,7 +11,7 @@ namespace BluetoothPoker
         Dictionary<string, int> cards52 = new Dictionary<string, int>();
         List<List<string>> allplayers = new List<List<string>>();
         WinningRules status = new WinningRules();
-        Dictionary<List<string>, int>[] PlayerDic = new Dictionary<List<string>, int>[8];
+        Dictionary<List<string>, int> PlayersDic = new Dictionary<List<string>, int>();
         Tuple<List<string>, int>[] PlayerTuple = new Tuple<List<string>, int>[8];
 
         public PlayerRatings() { }
@@ -37,8 +37,7 @@ namespace BluetoothPoker
                     allplayers[i].AddRange(allplayers[8]);
                     PlayerTuple[i] = BestofFive(allplayers[i]);
                     allplayers[i] = PlayerTuple[i].Item1;
-                    PlayerDic[i] = new Dictionary<List<string>, int>();
-                    PlayerDic[i].Add(allplayers[i], PlayerTuple[i].Item2);
+                    PlayersDic.Add(allplayers[i], PlayerTuple[i].Item2);
                 }
                 else
                 {
@@ -165,7 +164,7 @@ namespace BluetoothPoker
         public void playerstatus(int index, List<string> players, int level)
         {
            
-            PlayerDic[index].Add(players, level);
+            PlayersDic.Add(players, level);
         }
     }
 }
