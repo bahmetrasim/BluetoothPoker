@@ -47,7 +47,6 @@ namespace BluetoothPoker
             }
             if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
-                el.Add(temp[4]);
                 temp.RemoveRange(4, 2);
                 el = SortbyDic(el);
                 temp.AddRange(removedublicateall(el).GetRange(0, 1));
@@ -81,7 +80,6 @@ namespace BluetoothPoker
             }
             if (temp.Count == 6 && cards52[temp[1]] != cards52[temp[3]] && cards52[temp[3]] != cards52[temp[5]])
             {
-                el.Add(temp[4]);/*----Buraya Bak*/
                 temp.RemoveRange(4, 2);
                 SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
                 temp.AddRange(removedublicateall(el).GetRange(0, 1));
