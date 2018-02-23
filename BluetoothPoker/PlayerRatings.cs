@@ -81,8 +81,8 @@ namespace BluetoothPoker
             Tuple<bool, List<string>, int> TwoPair = new Tuple<bool, List<string>, int>(false, new List<string>(), 0);
             Tuple<bool, List<string>, int> OnePair = new Tuple<bool, List<string>, int>(false, new List<string>(), 0);
             
-                //RoyalFlush = status.isRoyalFlush(player);
-                //if (RoyalFlush.Item1){ break; }
+                RoyalFlush = status.isRoyalFlush(player);
+                if (RoyalFlush.Item1){ return new Tuple<List<string>, int>(RoyalFlush.Item2,RoyalFlush.Item3); }
                 //StraightFlush = status.isStraightFlush(player);
                 //if (StraightFlush.Item1) { break; }
                 FourofaKind = status.isFourofaKind(player);

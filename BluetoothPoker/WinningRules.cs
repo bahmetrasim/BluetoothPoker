@@ -26,7 +26,7 @@ namespace BluetoothPoker
             valueslist.Sort();
             return new Tuple<int, int>(valueslist[valueslist.Count - 1], valueslist[valueslist.Count - 2]);
         }
-        public List<string> HighCard (List<string> el)
+        public List<string> HighCard(List<string> el)
         {
             return el.GetRange(0, 5);
         }
@@ -75,8 +75,8 @@ namespace BluetoothPoker
             {
                 if (cards52[el[i]] == cards52[el[i + 1]])
                 {
-                        temp.Add(el[i]);
-                        temp.Add(el[i + 1]);
+                    temp.Add(el[i]);
+                    temp.Add(el[i + 1]);
                     i++;
                 }
             }
@@ -90,7 +90,7 @@ namespace BluetoothPoker
             else if (temp.Count == 4 && cards52[temp[1]] != cards52[temp[3]])
             {
                 SortbyDic(removepairs(el, cards52[temp[1]], cards52[temp[3]]));
-                temp.AddRange(el.GetRange(0,1));
+                temp.AddRange(el.GetRange(0, 1));
                 return new Tuple<bool, List<string>, int>(true, temp, level);
             }
             return new Tuple<bool, List<string>, int>(false, el, level);
@@ -116,7 +116,7 @@ namespace BluetoothPoker
             List<string> temp = new List<string>();
             List<string> el1 = new List<string>();
             el1.AddRange(el);
-           removedublicates(el1);
+            removedublicates(el1);
             for (int i = 0; i < el1.Count - 1; i++)
             {
                 if (cards52[el1[i]] == cards52[el1[i + 1]] + 1)
@@ -152,7 +152,7 @@ namespace BluetoothPoker
         public Tuple<bool, List<string>, int> isFourofaKind(List<string> el, int level = 7)
         {
             List<string> temp = new List<string>();
-            for (int i = 0; i < el.Count -3 ; i++)
+            for (int i = 0; i < el.Count - 3; i++)
             {
                 if (cards52[el[i]] == cards52[el[i + 1]] && cards52[el[i]] == cards52[el[i + 2]] && cards52[el[i]] == cards52[el[i + 3]])
                 {
@@ -172,13 +172,22 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, int, int>(false, 0, level);
         }
-        public Tuple<bool, int, int> isRoyalFlush(List<string> el, int level = 9)
+        public Tuple<bool, List<string>, int> isRoyalFlush(List<string> el, int level = 9)
         {
-            if (isStraight(el).Item1 == true && isFlush(el).Item1 == true)
+            List<string> temp = new List<string>();
+            for (int i = 0; i < el.Count; i++)
             {
-                return new Tuple<bool, int, int>(true, 3, level);
+                temp.Add(el[i].Substring(el[i].Length - 1));
             }
-            return new Tuple<bool, int, int>(false, 0, level);
+            for (int i = 0; i < 3; i++)
+            {
+                if ((temp.Count(suits => suits == temp[i])) == 5 & cards52[el[i]] == 14)
+                {
+                    return new Tuple<bool, List<string>, int>(true, new List<string>(), level);
+                }
+            }
+
+            return new Tuple<bool, List<string>, int>(false, new List<string>(), level);
         }
         public List<string> removedublicates(List<string> del)
         {
@@ -207,7 +216,7 @@ namespace BluetoothPoker
                         count++;
                     }
                 }
-                if (count !=0)
+                if (count != 0)
                 {
                     el.Remove(el[i]);
                     i--;
@@ -215,7 +224,7 @@ namespace BluetoothPoker
             }
             return el;
         }
-        public List<string> removepairs(List<string> del, int a, int b =0)
+        public List<string> removepairs(List<string> del, int a, int b = 0)
         {
             for (int i = 0; i < del.Count; i++)
             {
