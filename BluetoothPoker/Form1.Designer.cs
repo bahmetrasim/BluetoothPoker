@@ -58,6 +58,7 @@
             this.plabel2 = new System.Windows.Forms.Label();
             this.pmoney3 = new System.Windows.Forms.Label();
             this.plabel3 = new System.Windows.Forms.Label();
+            this.Continue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Deal
@@ -311,11 +312,22 @@
             this.plabel3.TabIndex = 28;
             this.plabel3.Text = "Player3";
             // 
+            // Continue
+            // 
+            this.Continue.Location = new System.Drawing.Point(722, 126);
+            this.Continue.Name = "Continue";
+            this.Continue.Size = new System.Drawing.Size(68, 34);
+            this.Continue.TabIndex = 30;
+            this.Continue.Text = "Cont.";
+            this.Continue.UseVisualStyleBackColor = true;
+            this.Continue.Click += new System.EventHandler(this.Continue_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 373);
+            this.Controls.Add(this.Continue);
             this.Controls.Add(this.pmoney3);
             this.Controls.Add(this.plabel3);
             this.Controls.Add(this.pmoney2);
@@ -385,6 +397,7 @@
         private System.Windows.Forms.Label plabel2;
         private System.Windows.Forms.Label pmoney3;
         private System.Windows.Forms.Label plabel3;
+        private System.Windows.Forms.Button Continue;
     }
 }
 

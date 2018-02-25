@@ -15,42 +15,34 @@ namespace BluetoothPoker
         List<string>[] players = new List<string>[9];
         Dealer Deste = new Dealer();
         List<List<string>> allplayers = new List<List<string>>();
+
         public Form1()
         {
             InitializeComponent();
+            players[8] = new List<string>();
         }
         private void Deal_Click(object sender, EventArgs e)
         {
             ResetForm();
             Deste.resetcards();
-            //Player 9 is Table and 5 cards
-            for (int i = 0; i < 9; i++)
+            //Player 9 is Table with continue button
+            for (int i = 0; i < 8; i++)
             {
                 players[i] = new List<string>();
-                if (i<8)
-                {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        players[i].Add(Deste.getcard());
-                    } 
-                }
-                else
-                {
-                    for (int j = 0; j < 5; j++)
-                    {
-                        players[i].Add(Deste.getcard());
-                    }
-                }
-
+                players[i].Add(Deste.getcard());
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                players[i].Add(Deste.getcard());
             }
             for (int i = 0; i < 9; i++)
             {
                 allplayers.Add(players[i]);
-            }       
+            }
             UpdateForm(allplayers);
-            PlayerRatings FinalCards = new PlayerRatings((Deste.allcards()), allplayers);
-            FinalCards.PlayerCardswithTable();
+
         }
+
         public void UpdateForm(List<List<string>> all)
         {
             int playernumber = 0;
@@ -58,11 +50,11 @@ namespace BluetoothPoker
             {
                 if (playernumber == 8)
                 {
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < players[8].Count; i++)
                     {
                         //Controls["tlabel" + i].Text = all[playernumber][i];
                         ((Label)Controls["tlabel" + i]).Image = resizeImage((Image)Properties.Resources.ResourceManager.GetObject("_" + all[playernumber][i]), ((Label)Controls["tlabel" + i]).Size);
-                       // ((Label)Controls["tlabel" + i]).Image.
+                        // ((Label)Controls["tlabel" + i]).Image.
                     }
                     //tlabel0.Image = (Image)Properties.Resources.ResourceManager.GetObject(("_" + tlabel0.Text));
                     playernumber++;
@@ -98,10 +90,17 @@ namespace BluetoothPoker
         }
         private void Winner_Click(object sender, EventArgs e)
         {
-            
+
             //Controls["label" + 10].Text = winner.Compare();
-           
+            PlayerRatings FinalCards = new PlayerRatings((Deste.allcards()), allplayers);
+            FinalCards.PlayerCardswithTable();
+
         }
 
+        private void Continue_Click(object sender, EventArgs e)
+        {
+            players[8].Add(Deste.getcard());
+            UpdateForm(allplayers);
+        }
     }
 }
