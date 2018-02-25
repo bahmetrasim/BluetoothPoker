@@ -59,6 +59,7 @@
             this.pmoney3 = new System.Windows.Forms.Label();
             this.plabel3 = new System.Windows.Forms.Label();
             this.Continue = new System.Windows.Forms.Button();
+            this.winreason = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Deal
@@ -322,11 +323,20 @@
             this.Continue.UseVisualStyleBackColor = true;
             this.Continue.Click += new System.EventHandler(this.Continue_Click);
             // 
+            // winreason
+            // 
+            this.winreason.AutoSize = true;
+            this.winreason.Location = new System.Drawing.Point(197, 102);
+            this.winreason.Name = "winreason";
+            this.winreason.Size = new System.Drawing.Size(0, 13);
+            this.winreason.TabIndex = 31;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 373);
+            this.Controls.Add(this.winreason);
             this.Controls.Add(this.Continue);
             this.Controls.Add(this.pmoney3);
             this.Controls.Add(this.plabel3);
@@ -398,6 +408,7 @@
         private System.Windows.Forms.Label pmoney3;
         private System.Windows.Forms.Label plabel3;
         private System.Windows.Forms.Button Continue;
+        private System.Windows.Forms.Label winreason;
     }
 }
 

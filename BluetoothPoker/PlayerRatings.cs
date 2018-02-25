@@ -28,7 +28,7 @@ namespace BluetoothPoker
             //playerresult(abc);
             return "player1";
         }
-        public void PlayerCardswithTable()
+        public Dictionary<List<string>, int> PlayerCardswithTable()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -44,6 +44,7 @@ namespace BluetoothPoker
                     allplayers[i] = allplayers[8];
                 }
             }
+            return PlayersDic;
         }
         //public Tuple<int, int, int, int, int> playerresult(List<string> players)
         //{ //1.int level, 2. int başlangıç 3.int ve two pair ve full house için, 4 int kalan en büyük
@@ -161,10 +162,9 @@ namespace BluetoothPoker
             //return list;
 
         }
-        public void playerstatus(int index, List<string> players, int level)
+        public Dictionary<List<string>, int> sortdic(Dictionary<List<string>, int> winner)
         {
-           
-            PlayersDic.Add(players, level);
+           return winner.OrderByDescending(u => u.Value).ToDictionary(z => z.Key, y => y.Value);
         }
     }
 }

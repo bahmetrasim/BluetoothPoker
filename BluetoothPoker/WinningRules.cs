@@ -9,13 +9,25 @@ namespace BluetoothPoker
     class WinningRules
     {
         Dictionary<string, int> cards52 = new Dictionary<string, int>();
+        Dictionary<int, string> levels = new Dictionary<int, string>();
+        public WinningRules()
+        {
+            levels.Add(0, "High Card");
+            levels.Add(1,"One Pair");
+            levels.Add(2, "Two Pair");
+            levels.Add(3, "Three of a Kind");
+            levels.Add(4, "Straight");
+            levels.Add(5, "Flush");
+            levels.Add(6, "Full House");
+            levels.Add(7, "Four of a Kind");
+            levels.Add(8, "Straight Flush");
+            levels.Add(9, "Royal Flush");
 
-        public WinningRules() { }
+        }
         public WinningRules(Dictionary<string, int> cards52)
         {
             this.cards52 = cards52;
         }
-
         public Tuple<int, int> HighTwo(List<string> left)
         {
             List<int> valueslist = new List<int>();
@@ -188,7 +200,7 @@ namespace BluetoothPoker
             }
 
             return new Tuple<bool, List<string>, int>(false, new List<string>(), level);
-        }
+        } // OK 
         public List<string> removedublicates(List<string> del)
         {
             for (int i = 0; i < del.Count - 1; i++)
@@ -256,6 +268,10 @@ namespace BluetoothPoker
             //return list;
 
         }
-
+        public string getwinnerlevel (int level)
+        {
+            string name = levels[level];
+            return name;
+        }
     }
 }

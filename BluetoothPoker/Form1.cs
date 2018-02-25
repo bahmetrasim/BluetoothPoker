@@ -15,16 +15,19 @@ namespace BluetoothPoker
         List<string>[] players = new List<string>[9];
         Dealer Deste = new Dealer();
         List<List<string>> allplayers = new List<List<string>>();
+        Dictionary<List<string>, int> bestoffive = new Dictionary<List<string>, int>();
 
         public Form1()
         {
             InitializeComponent();
             players[8] = new List<string>();
         }
+
         private void Deal_Click(object sender, EventArgs e)
         {
             ResetForm();
             Deste.resetcards();
+            players[8].Clear();
             //Player 9 is Table with continue button
             for (int i = 0; i < 8; i++)
             {
@@ -71,6 +74,7 @@ namespace BluetoothPoker
             }
             while (playernumber < allplayers.Count);
         }
+
         public void ResetForm()
         {
             for (int i = 0; i < 16; i++)
@@ -84,17 +88,28 @@ namespace BluetoothPoker
                 if (players[i] != null) players[i].Clear();
             }
         }
+
         public static Image resizeImage(Image imgToResize, Size size)
         {
             return (Image)(new Bitmap(imgToResize, size));
         }
+
         private void Winner_Click(object sender, EventArgs e)
         {
-
             //Controls["label" + 10].Text = winner.Compare();
-            PlayerRatings FinalCards = new PlayerRatings((Deste.allcards()), allplayers);
-            FinalCards.PlayerCardswithTable();
-
+            if (allplayers[8].Count != 5) { }
+            else
+            {
+                PlayerRatings FinalCards = new PlayerRatings((Deste.allcards()), allplayers);
+                bestoffive = FinalCards.PlayerCardswithTable();
+                bestoffive = FinalCards.sortdic(bestoffive);
+                WinningRules winnigrules = new WinningRules();
+                if (bestoffive.ElementAt(0).Value != bestoffive.ElementAt(1).Value)
+                {
+                    string a = winnigrules.getwinnerlevel(bestoffive.ElementAt(0).Value);
+                    Controls["winreason"].Text = "Player " + allplayers.IndexOf(bestoffive.ElementAt(0).Key) + " wins" +  a;
+                }
+            }
         }
 
         private void Continue_Click(object sender, EventArgs e)
