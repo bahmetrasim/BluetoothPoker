@@ -90,8 +90,8 @@ namespace BluetoothPoker
                 if (FourofaKind.Item1) { return new Tuple<List<string>, int>(FourofaKind.Item2, FourofaKind.Item3); }
                 //FullHouse = status.isFullHouse(player);
                 //if (FullHouse.Item1) { break; }
-                //Flush = status.isFlush(player);
-                //if (Flush.Item1) { break; }
+                Flush = status.isFlush(player);
+                if (Flush.Item1) { return new Tuple<List<string>, int>(Flush.Item2, Flush.Item3); }
                 Straight = status.isStraight(player);
                 if (Straight.Item1) { return new Tuple<List<string>, int>(Straight.Item2, Straight.Item3); }
                 ThreeofaKind  = status.isThreeofaKind(player);

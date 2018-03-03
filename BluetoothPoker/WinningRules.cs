@@ -13,7 +13,7 @@ namespace BluetoothPoker
         public WinningRules()
         {
             levels.Add(0, "High Card");
-            levels.Add(1,"One Pair");
+            levels.Add(1, "One Pair");
             levels.Add(2, "Two Pair");
             levels.Add(3, "Three of a Kind");
             levels.Add(4, "Straight");
@@ -148,11 +148,38 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, List<string>, int>(false, el, level);
 
-        } //ok
-        public Tuple<bool, int, int> isFlush(List<string> el, int level = 5)
+        } //OK
+        public Tuple<bool, List<string>, int> isFlush(List<string> el, int level = 5)
         {
-            return new Tuple<bool, int, int>(false, 0, level); //return with highest Value
-        }
+            List<string> temp = new List<string>();
+            for (int i = 0; i < el.Count; i++)
+            {
+                temp.Add(el[i].Substring(el[i].Length - 1));
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if ((temp.Count(suits => suits == temp[i])) >= 5)
+                {
+                    string suit = temp[i];
+                    temp.Clear();
+                    for (int j = 0; j < el.Count; j++)
+                    {
+                        if (el[j].Substring(el[j].Length - 1) == suit)
+                        {
+                            temp.Add(el[j]);
+                            temp = SortbyDic(temp);
+                            if (temp.Count > 5)
+                            {
+                                temp.RemoveRange(5, temp.Count - 5);
+                            }
+                        }
+                    }
+                    return new Tuple<bool, List<string>, int>(true, temp, level);
+                }
+            }
+
+            return new Tuple<bool, List<string>, int>(false, new List<string>(), level);
+        } // OK
         public Tuple<bool, int, int, int> isFullHouse(List<string> el, int level = 6)
         {
             if (isTwoPair(el).Item1 == true && isThreeofaKind(el).Item1 == true)
@@ -176,14 +203,44 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, List<string>, int>(false, el, level);
         }  //OK Kontrol Et
-        public Tuple<bool, int, int> isStraightFlush(List<string> el, int level = 8)
+        public Tuple<bool, List<string>, int> isStraightFlush(List<string> el, int level = 8)
         {
-            if (isStraight(el).Item1 == true && isFlush(el).Item1 == true)
+            List<string> temp = new List<string>();
+            for (int i = 0; i < el.Count; i++)
             {
-                return new Tuple<bool, int, int>(true, 3, level);
+                temp.Add(el[i].Substring(el[i].Length - 1));
             }
-            return new Tuple<bool, int, int>(false, 0, level);
-        }
+            for (int i = 0; i < 3; i++)
+            {
+                if ((temp.Count(suits => suits == temp[i])) >= 5)
+                {
+                    string suit = temp[i];
+                    temp.Clear();
+                    for (int j = 0; j < el.Count; j++)
+                    {
+                        if (el[j].Substring(el[j].Length - 1) == suit)
+                        {
+                            temp.Add(el[j]);
+                            temp = SortbyDic(temp);
+                            for (int k = 0; k < temp.Count - 4; k++)
+                            {
+                                if (cards52[temp[k]] == cards52[temp[k + 1]] + 1 &&
+                                cards52[temp[k + 1]] == cards52[temp[k + 2]] + 1 &&
+                                cards52[temp[k + 2]] == cards52[temp[k + 3]] + 1 &&
+                                cards52[temp[k + 3]] == cards52[temp[k + 4]] + 1)
+
+                                {
+                                    return new Tuple<bool, List<string>, int>(true, temp.GetRange(k,5), level);
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            return new Tuple<bool, List<string>, int>(false, new List<string>(), level);
+        } // OK
         public Tuple<bool, List<string>, int> isRoyalFlush(List<string> el, int level = 9)
         {
             List<string> temp = new List<string>();
@@ -193,14 +250,36 @@ namespace BluetoothPoker
             }
             for (int i = 0; i < 3; i++)
             {
-                if ((temp.Count(suits => suits == temp[i])) == 5 & cards52[el[i]] == 14)
+                if ((temp.Count(suits => suits == temp[i])) >= 5)
                 {
-                    return new Tuple<bool, List<string>, int>(true, new List<string>(), level);
+                    string suit = temp[i];
+                    temp.Clear();
+                    for (int j = 0; j < el.Count; j++)
+                    {
+                        if (el[j].Substring(el[j].Length - 1) == suit)
+                        {
+                            temp.Add(el[j]);
+                            temp = SortbyDic(temp);
+                            for (int k = 0; k < temp.Count - 4; k++)
+                            {
+                                if (cards52[temp[k]] == cards52[temp[k + 1]] + 1 &&
+                                cards52[temp[k + 1]] == cards52[temp[k + 2]] + 1 &&
+                                cards52[temp[k + 2]] == cards52[temp[k + 3]] + 1 &&
+                                cards52[temp[k + 3]] == cards52[temp[k + 4]] + 1 &&
+                                cards52[temp[k]] == 14)
+
+                                {
+                                    return new Tuple<bool, List<string>, int>(true, temp.GetRange(k, 5), level);
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
 
             return new Tuple<bool, List<string>, int>(false, new List<string>(), level);
-        } // OK 
+        } // OK
         public List<string> removedublicates(List<string> del)
         {
             for (int i = 0; i < del.Count - 1; i++)
@@ -268,7 +347,7 @@ namespace BluetoothPoker
             //return list;
 
         }
-        public string getwinnerlevel (int level)
+        public string getwinnerlevel(int level)
         {
             string name = levels[level];
             return name;
