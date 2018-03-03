@@ -106,7 +106,7 @@ namespace BluetoothPoker
         public string getcard()
         {
             Random num = new Random();
-            Thread.SpinWait(52);
+            Thread.SpinWait(520000);
             string card = left.Keys.ElementAt(num.Next(left.Count)).ToString();
             left.Remove(card);
             return card;

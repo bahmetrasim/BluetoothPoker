@@ -87,6 +87,7 @@ namespace BluetoothPoker
             {
                 if (players[i] != null) players[i].Clear();
             }
+            Controls["winreason"].Text = "";
         }
 
         public static Image resizeImage(Image imgToResize, Size size)
@@ -108,6 +109,11 @@ namespace BluetoothPoker
                 {
                     string a = winnigrules.getwinnerlevel(bestoffive.ElementAt(0).Value);
                     Controls["winreason"].Text = "Player " + allplayers.IndexOf(bestoffive.ElementAt(0).Key) + " wins" +  a;
+                }
+                else
+                {
+                    int equalplayers = bestoffive.Values.Count(high => high == bestoffive.ElementAt(0).Value);
+                    //Devam Edilecek...
                 }
             }
         }

@@ -148,7 +148,7 @@ namespace BluetoothPoker
             }
             return new Tuple<bool, List<string>, int>(false, el, level);
 
-        } //OK
+        } //OK A,2,3,4 Şartını ekle!!
         public Tuple<bool, List<string>, int> isFlush(List<string> el, int level = 5)
         {
             List<string> temp = new List<string>();
