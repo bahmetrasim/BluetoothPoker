@@ -53,11 +53,21 @@ namespace BluetoothPoker
             {
                 if (playernumber == 8)
                 {
-                    for (int i = 0; i < players[8].Count; i++)
+                    if (players[8].Count == 0)
                     {
-                        //Controls["tlabel" + i].Text = all[playernumber][i];
-                        ((Label)Controls["tlabel" + i]).Image = resizeImage((Image)Properties.Resources.ResourceManager.GetObject("_" + all[playernumber][i]), ((Label)Controls["tlabel" + i]).Size);
-                        // ((Label)Controls["tlabel" + i]).Image.
+                        for (int i = 0; i < 5; i++)
+                        {
+                            ((Label)Controls["tlabel" + i]).Image = null;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < players[8].Count; i++)
+                        {
+                            //Controls["tlabel" + i].Text = all[playernumber][i];
+                            ((Label)Controls["tlabel" + i]).Image = resizeImage((Image)Properties.Resources.ResourceManager.GetObject("_" + all[playernumber][i]), ((Label)Controls["tlabel" + i]).Size);
+                            // ((Label)Controls["tlabel" + i]).Image.
+                        }
                     }
                     //tlabel0.Image = (Image)Properties.Resources.ResourceManager.GetObject(("_" + tlabel0.Text));
                     playernumber++;
@@ -108,12 +118,21 @@ namespace BluetoothPoker
                 if (bestoffive.ElementAt(0).Value != bestoffive.ElementAt(1).Value)
                 {
                     string a = winnigrules.getwinnerlevel(bestoffive.ElementAt(0).Value);
-                    Controls["winreason"].Text = "Player " + allplayers.IndexOf(bestoffive.ElementAt(0).Key) + " wins" +  a;
+                    Controls["winreason"].Text = "Player " + (allplayers.IndexOf(bestoffive.ElementAt(0).Key)+1) + " wins " + a;
                 }
                 else
                 {
-                    int equalplayers = bestoffive.Values.Count(high => high == bestoffive.ElementAt(0).Value);
-                    //Devam Edilecek...
+                    Dictionary<string, List<string>> compare = new Dictionary<string, List<string>>();
+                    int high = bestoffive.ElementAt(0).Value;
+                    int equalplayers = bestoffive.Values.Count(highest => highest == bestoffive.ElementAt(0).Value);
+                    for (int i = 0; i < equalplayers; i++)
+                    {
+                        compare.Add(("Player" + (allplayers.IndexOf(bestoffive.ElementAt(i).Key)+1)), bestoffive.ElementAt(i).Key);
+                    }
+                    Controls["winreason"].Text = FinalCards.Compare(compare) +  " wins " + winnigrules.getwinnerlevel(high) ;
+
+
+                    //compare
                 }
             }
         }

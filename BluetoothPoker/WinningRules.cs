@@ -131,6 +131,10 @@ namespace BluetoothPoker
             removedublicates(el1);
             for (int i = 0; i < el1.Count - 1; i++)
             {
+                if (temp.Count == 5)
+                {
+                    break;
+                }
                 if (cards52[el1[i]] == cards52[el1[i + 1]] + 1)
                 {
                     if (temp.Count == 0)
@@ -138,7 +142,10 @@ namespace BluetoothPoker
                         temp.Add(el1[i]);
                         temp.Add(el1[i + 1]);
                     }
-                    else { temp.Add(el1[i + 1]); }
+                    else
+                    {
+                        temp.Add(el1[i + 1]);
+                    }
                 }
                 else { temp.Clear(); }
             }
