@@ -21,8 +21,15 @@ namespace BluetoothPoker
         {
             InitializeComponent();
             players[8] = new List<string>();
+            for (int i = 1; i < 9; i++)
+            {
+                Controls["P"+i+"FOLD"].MouseClick += Buttons_Click;
+            }
         }
-
+        private void Buttons_Click(object sender, EventArgs e)
+        {
+            Button name = (Button)sender;
+        }
         private void Deal_Click(object sender, EventArgs e)
         {
             ResetForm();
@@ -45,7 +52,6 @@ namespace BluetoothPoker
             UpdateForm(allplayers);
 
         }
-
         public void UpdateForm(List<List<string>> all)
         {
             int playernumber = 0;
@@ -84,7 +90,6 @@ namespace BluetoothPoker
             }
             while (playernumber < allplayers.Count);
         }
-
         public void ResetForm()
         {
             for (int i = 0; i < 16; i++)
@@ -99,12 +104,10 @@ namespace BluetoothPoker
             }
             Controls["winreason"].Text = "";
         }
-
         public static Image resizeImage(Image imgToResize, Size size)
         {
             return (Image)(new Bitmap(imgToResize, size));
         }
-
         private void Winner_Click(object sender, EventArgs e)
         {
             //Controls["label" + 10].Text = winner.Compare();
@@ -129,18 +132,18 @@ namespace BluetoothPoker
                     {
                         compare.Add(("Player" + (allplayers.IndexOf(bestoffive.ElementAt(i).Key)+1)), bestoffive.ElementAt(i).Key);
                     }
-                    Controls["winreason"].Text = FinalCards.Compare(compare) +  " wins " + winnigrules.getwinnerlevel(high) ;
-
-
-                    //compare
+                    Controls["winreason"].Text = FinalCards.Compare(compare) +  " wins " + winnigrules.getwinnerlevel(high) ;            
                 }
             }
         }
-
         private void Continue_Click(object sender, EventArgs e)
         {
             players[8].Add(Deste.getcard());
             UpdateForm(allplayers);
+        }
+        public void BravePlayers()
+        {
+
         }
     }
 }
