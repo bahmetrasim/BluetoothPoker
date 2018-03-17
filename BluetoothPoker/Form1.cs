@@ -138,8 +138,15 @@ namespace BluetoothPoker
         }
         private void Continue_Click(object sender, EventArgs e)
         {
-            players[8].Add(Deste.getcard());
-            UpdateForm(allplayers);
+            if (players[8].Count == 5)
+            {
+                Controls["winreason"].Text = "Tüm Kağıtlar Dağıtılmıştır.";
+            }
+            else
+            {
+                players[8].Add(Deste.getcard());
+                UpdateForm(allplayers);
+            }  
         }
         public void BravePlayers()
         {

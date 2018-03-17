@@ -228,21 +228,21 @@ namespace BluetoothPoker
                         if (el[j].Substring(el[j].Length - 1) == suit)
                         {
                             temp.Add(el[j]);
-                            temp = SortbyDic(temp);
-                            for (int k = 0; k < temp.Count - 4; k++)
-                            {
-                                if (cards52[temp[k]] == cards52[temp[k + 1]] + 1 &&
-                                cards52[temp[k + 1]] == cards52[temp[k + 2]] + 1 &&
-                                cards52[temp[k + 2]] == cards52[temp[k + 3]] + 1 &&
-                                cards52[temp[k + 3]] == cards52[temp[k + 4]] + 1)
-
-                                {
-                                    return new Tuple<bool, List<string>, int>(true, temp.GetRange(k,5), level);
-                                }
-                            }
                         }
                     }
-                    
+                    temp = SortbyDic(temp);
+                    for (int k = 0; k < temp.Count - 4; k++)
+                    {
+                        if (cards52[temp[k]] == cards52[temp[k + 1]] + 1 &&
+                        cards52[temp[k + 1]] == cards52[temp[k + 2]] + 1 &&
+                        cards52[temp[k + 2]] == cards52[temp[k + 3]] + 1 &&
+                        cards52[temp[k + 3]] == cards52[temp[k + 4]] + 1)
+
+                        {
+                            return new Tuple<bool, List<string>, int>(true, temp.GetRange(k, 5), level);
+                        }
+                    }
+
                 }
             }
 

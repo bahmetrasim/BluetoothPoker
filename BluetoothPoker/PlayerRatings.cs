@@ -109,8 +109,8 @@ namespace BluetoothPoker
 
             RoyalFlush = status.isRoyalFlush(player);
             if (RoyalFlush.Item1) { return new Tuple<List<string>, int>(RoyalFlush.Item2, RoyalFlush.Item3); }
-            //StraightFlush = status.isStraightFlush(player);
-            //if (StraightFlush.Item1) { break; }
+            StraightFlush = status.isStraightFlush(player);
+            if (StraightFlush.Item1) { return new Tuple<List<string>, int>(StraightFlush.Item2, StraightFlush.Item3); }
             FourofaKind = status.isFourofaKind(player);
             if (FourofaKind.Item1) { return new Tuple<List<string>, int>(FourofaKind.Item2, FourofaKind.Item3); }
             //FullHouse = status.isFullHouse(player);
